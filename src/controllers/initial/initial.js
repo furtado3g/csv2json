@@ -4,8 +4,9 @@ const csv = require('csvtojson')
 const request = require('request')
 //dependence for requests
 const api = require('../../configs/api')
-//import model
-const model = require('../../model/executeQueries/executeQueries')
+//import models
+const insert = require('../../model/Insert/insert')
+
 /*
     MODEL MICROSERVICE TO EXECUTE SQL COMMAND INTO NODEJS REST API]
     @model.select({json whith infos})
@@ -13,6 +14,7 @@ const model = require('../../model/executeQueries/executeQueries')
     @model.update({json whith infos})
     @model.delete({json whith infos})
 */
+
 //controller function object
 const shoot = {
     async findTheCsv(req,res){
