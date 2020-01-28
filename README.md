@@ -1,1 +1,1 @@
-# csv2json
+# Converter csv to insert tool to oracle databases
