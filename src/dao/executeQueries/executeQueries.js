@@ -3,16 +3,60 @@ const RunQuery = require('../../configs/oracleDB')
 //function to recieve alumni infos 
 const operations = {
     async select(params){
+
+        //variables to make search into database
+        let fields
+        let tables
+        let relationship
+
+        //make the necesary fields to make a search
+        params.fields.map( field => {
+            
+            //if fields is null or undefined get first value
+            if(!fields){
+                fields = field
+            }else{
+                fields = fields + ',' + field
+            }
+
+        })
+
+        //bring the necessary tables to select
+        params.tableNames.map( table => {
+            
+            //if tables is null or undefined get first value
+            if(!tables){
+                tables = table
+            }else{
+                tables = tables + ',' + tables
+            }
+
+        })
+
+        params.relations.map(relation => {
+            
+            //if relationship is null or undefined get first value
+            if(!relationship){
+                relationship = relation
+            }else{
+                relationship = relationship + ' and ' + relation
+            }
+
+        })
+
         //sub mounted query 
-        let query = 'select'+params.fieds+
-                    '  from'+params.tables+
-                    ' where'+params.conditions
+        let query = 'select'+field+
+                    '  from'+tables+
+                    ' where'+relationship
         //real run the query 
         await RunQuery(query);
     },
+    /*
+        method to insert values to table
+    */
     async insert(params){
+        
         //variablles to make insert
-
         let fields
         let values        
 
@@ -39,7 +83,7 @@ const operations = {
             }
             
         })
-        
+
         //sub mounted query 
         let query = 'insert into'+ params.tableName+'('+fields+')'+
                     ' values'+ values

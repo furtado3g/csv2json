@@ -10,7 +10,7 @@ const table = {
 }
 
 //define 
-const ParamsModel = (params) =>{
+const ParamsModel = async (params) =>{
     
     //transform json fieldnames to param to arg values
     Object.keys(params.values).map(key=>{
@@ -26,7 +26,7 @@ const ParamsModel = (params) =>{
     table.tableName = params.tableName;
     
     //make the real insert
-    operations.store(table)
+    return await operations.store(table)
 
 }
 
