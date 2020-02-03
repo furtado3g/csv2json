@@ -1,6 +1,6 @@
 //import connection and run method
 const RunQuery = require('../../configs/oracleDB')
-//function to recieve alumni infos 
+//function to recieve infos 
 const operations = {
     async select(params){
 
@@ -92,6 +92,37 @@ const operations = {
         await RunQuery(query);
     },
     async update(params){
+        
+        let values
+        let relation
+        let tableNames
+
+        let counter = 0;
+        
+
+        params.fields.map(val =>{
+            //if the values 
+            if(!values){
+                values = val + "=" + params.values[counter]
+            }else{
+                values = values + " ," + val + "=" + params.values[counter]
+            }
+
+            //defines index
+            counter++
+        
+        });
+
+        params.relation.map(relations =>{
+
+            if(!relation){
+                relation = relations
+            }else{
+                relation = relation + " and " + relations
+            }
+
+        })
+        
         //sub mounted query 
         let query = 'update'+params.tableName+
                     '   set'+params.updateName+
