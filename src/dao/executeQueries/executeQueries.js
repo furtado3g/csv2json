@@ -131,9 +131,21 @@ const operations = {
         await RunQuery(query);
     },
     async delete(params){
+        //conditions to execute query
+        let conditions
+
+        //map to assign conditions in order
+        params.conditions.map(condition =>{
+            if(!conditions){
+                conditions = conditions
+            }else{
+                conditions = conditions + ' and ' + condition
+            }
+        })
+
         //sub mounted query 
-        let query = 'delete from'+params.tableName+
-                    ' where'+params.conditions
+        let query = 'delete from' + params.tableName+
+                    ' where' + conditions
         //real run the query 
         await RunQuery(query);
     },
